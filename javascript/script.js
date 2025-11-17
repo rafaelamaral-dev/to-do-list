@@ -92,3 +92,34 @@ function setupEventListeners() {
 // Inicializa a aplicação
 setupEventListeners();
 renderTasks(); // Chama para garantir que a lista esteja vazia ao carregar
+
+// --- LÓGICA DE AÇÃO ---
+
+// 1. Alterna o status de 'concluída' de uma tarefa
+function toggleComplete(event) {
+    // Pega o índice da tarefa que está salvo no botão (data-index)
+    const index = event.target.dataset.index;
+    
+    // Altera a propriedade 'concluida' do objeto no Array 'tasks'
+    // O '!' inverte o valor: se era 'true' vira 'false', se era 'false' vira 'true'
+    tasks[index].concluida = !tasks[index].concluida;
+    
+    // Salva o Array atualizado e redesenha o DOM
+    renderTasks();
+}
+
+// 2. Deleta uma tarefa do Array
+function deleteTask(event) {
+    // Pega o índice da tarefa que está salvo no botão
+    const index = event.target.dataset.index;
+    
+    // O método 'splice' remove itens de um Array
+    // tasks.splice(índice_inicial, quantidade_a_remover)
+    tasks.splice(index, 1); // Remove 1 elemento a partir do 'index'
+    
+    // Salva o Array atualizado e redesenha o DOM
+    renderTasks();
+}
+
+// Lembre-se que as funções 'setupEventListeners', 'addTask' e 'renderTasks'
+// devem estar acima destas novas funções para que a aplicação funcione.
